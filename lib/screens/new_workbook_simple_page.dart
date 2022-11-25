@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 import 'package:quiz_book/models/problem.dart';
-import 'package:quiz_book/screens/new_workbook_complete_page.dart';
 
 class NewWorkbookSimplePage extends StatefulWidget {
   const NewWorkbookSimplePage({super.key});
@@ -35,7 +34,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
       appBar: AppBar(
         title: GetBuilder<WorkbookController>(
           builder: (controller) {
-            return Text(Get.arguments + ' ${controller.page+ 1}번');
+            return Text('${controller.name}  ${controller.page+ 1}번');
           }
         ),
       ),
@@ -183,7 +182,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                                   _formKey.currentState?.reset();
                                 }else if(controller.page == controller.problems.length){
                                   if(_formKey.currentState!.validate()) {
-                                    FocusScope.of(context).unfocus();
+                                    // FocusScope.of(context).unfocus();
                                     Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
                                     controller.addProblem(problem);
                                     controller.nextPage();
@@ -203,7 +202,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                     child: ElevatedButton(
                           onPressed: () {
                             if (controller.problems.isNotEmpty) {
-                              Get.off(()=>const NewWorkbookCompletePage(), transition: Transition.fadeIn);
+                              Get.offNamed('/new/complete');
                             }
                           },
                           child: const Text('문제지 완성')

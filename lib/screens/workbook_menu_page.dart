@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
-import 'package:quiz_book/models/problem.dart';
-import 'package:quiz_book/screens/home_page.dart';
-import 'package:quiz_book/screens/solve_workbook_page.dart';
 
 class WorkbookMenuPage extends StatelessWidget {
   const WorkbookMenuPage({super.key});
@@ -102,7 +99,7 @@ class WorkbookMenuPage extends StatelessWidget {
                                   var quizes = List<int>.generate(numProblems, (i) => i);
                                   quizes.shuffle();
                                   controller.setQuizzes(quizes.sublist(0,numQuiz));
-                                  Get.off(()=>const SolveWorkbookPage(), transition: Transition.fadeIn);
+                                  Get.offNamed('/workbook/solve');
                                 }
                               },
                               child: const Text('GO !'),

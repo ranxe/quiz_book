@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:quiz_book/components/color_selector.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
-import 'new_workbook_exel_page.dart';
-import 'new_workbook_simple_page.dart';
 
 class NewWorkbookPage extends StatefulWidget {
   const NewWorkbookPage({super.key});
@@ -148,7 +146,7 @@ class _NewWorkbookPageState extends State<NewWorkbookPage> {
                     return ElevatedButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();
-                        Get.off(() => const NewWorkbookSimplePage(), arguments: controller.name, transition: Transition.fadeIn);
+                        Get.offNamed('/new/simple');
                       },
                       child: const Text('간단히 만들기')
                     );
@@ -164,7 +162,7 @@ class _NewWorkbookPageState extends State<NewWorkbookPage> {
                     ),
                     onPressed: (){
                       FocusScope.of(context).unfocus();
-                      Get.off(() => const NewWorkbookExelPage(), arguments: controller.name, transition: Transition.fadeIn);
+                      Get.offNamed('/new/exel');
                     },
                     child: const Text('엑셀로 만들기')
                   );

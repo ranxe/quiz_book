@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
-import 'package:quiz_book/screens/new_workbook_page.dart';
-import 'package:quiz_book/screens/workbook_menu_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,7 +26,7 @@ class HomePage extends StatelessWidget {
                       backgroundColor : Colors.white
                     ),
                     onPressed: () {
-                      Get.to(const WorkbookMenuPage(), arguments: '단어장', transition: Transition.fadeIn);
+                      Get.toNamed('/workbook');
                     },
                     child: const SizedBox(
                       width: 120,
@@ -57,7 +55,7 @@ class HomePage extends StatelessWidget {
                       backgroundColor : Colors.white
                     ),
                     onPressed: () {
-                      Get.to(() => const NewWorkbookPage(), transition: Transition.fadeIn);
+                      Get.toNamed('/new');
                     },
                     child: const SizedBox(
                       width: 120,

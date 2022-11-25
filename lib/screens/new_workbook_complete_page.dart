@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quiz_book/screens/home_page.dart';
-import 'package:quiz_book/screens/workbook_menu_page.dart';
 
 class NewWorkbookCompletePage extends StatelessWidget {
   const NewWorkbookCompletePage({super.key});
@@ -27,7 +25,7 @@ class NewWorkbookCompletePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.off(() => const WorkbookMenuPage(), transition: Transition.fadeIn);
+                    Get.offNamed('/workbook');
                   },
                   child: const Text('당장 풀러가기')
                 ),
@@ -40,7 +38,7 @@ class NewWorkbookCompletePage extends StatelessWidget {
                     elevation: 1.0
                   ),
                   onPressed: () {
-                    Get.off(() => const HomePage(), transition: Transition.fadeIn);
+                    Get.offNamed('/');
                   },
                   child: const Text('다음에 풀기')
                 ),
