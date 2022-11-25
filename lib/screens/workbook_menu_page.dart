@@ -13,7 +13,6 @@ class WorkbookMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<WorkbookController>(
       builder: (controller) {
-      controller.initPage();
         return Scaffold(
             appBar: AppBar(
               title: Text(controller.name),
@@ -36,6 +35,7 @@ class WorkbookMenuPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(24.0, 16, 24, 16),
                   child: ElevatedButton(
                     onPressed: () {
+                      controller.initPage();
                       Get.dialog(
                         AlertDialog(
                           title : const Icon(Icons.settings, color : Colors.grey),
@@ -102,7 +102,7 @@ class WorkbookMenuPage extends StatelessWidget {
                                   var quizes = List<int>.generate(numProblems, (i) => i);
                                   quizes.shuffle();
                                   controller.setQuizzes(quizes.sublist(0,numQuiz));
-                                  Get.off(()=>SolveWorkbookPage(), transition: Transition.fadeIn);
+                                  Get.off(()=>const SolveWorkbookPage(), transition: Transition.fadeIn);
                                 }
                               },
                               child: const Text('GO !'),

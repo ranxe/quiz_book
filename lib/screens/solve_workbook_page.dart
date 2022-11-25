@@ -4,22 +4,45 @@ import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 import 'package:quiz_book/models/problem.dart';
 
-class SolveWorkbookPage extends StatelessWidget {
-  SolveWorkbookPage({super.key});
-  final _formKey = GlobalKey<FormState>();
-  
+class SolveWorkbookPage extends StatefulWidget {
+  const SolveWorkbookPage({super.key});
+
+  @override
+  State<SolveWorkbookPage> createState() => _SolveWorkbookPageState();
+}
+
+class _SolveWorkbookPageState extends State<SolveWorkbookPage> {
+
+  late FocusNode textFieldFocusNode;
+  final textFieldController = TextEditingController();
   bool isSolving = true;
-  String userAnswer = '';
+  late int problemIndex;
+  late Problem currentProblem;
+  
+
+  @override
+  void initState() {
+    super.initState();
+    textFieldFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    textFieldFocusNode.dispose();
+    textFieldController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size appSize = MediaQuery.of(context).size;
     return GetBuilder<WorkbookController>(
       builder: (controller) {
-        int problemIndex = controller.quizzes[controller.page];
-        Problem currentProblem = controller.problems[controller.quizzes[controller.page]];
-        print(currentProblem.hint);
+        print('current : ${controller.page}');
+        problemIndex = controller.quizzes[controller.page];
+        currentProblem = controller.problems[controller.quizzes[controller.page]];
         return Scaffold(
+          resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: Text('${controller.page + 1}/${controller.numQuiz}'),
               backgroundColor: Colors.grey.withOpacity(0.9),
@@ -75,10 +98,13 @@ class SolveWorkbookPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
                   child: Container(
-                    color : Colors.white.withOpacity(0.6),
                     height: appSize.height/4,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color : Colors.white.withOpacity(0.6),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: SingleChildScrollView(
@@ -87,50 +113,71 @@ class SolveWorkbookPage extends StatelessWidget {
                     )
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    height: 24,
-                    child: Form(
-                      key : _formKey,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                        hintText: '정답을 적어주세요',
-                        hintStyle: TextStyle(color: Colors.grey, fontStyle:FontStyle.italic)
+                Stack(
+                  alignment: AlignmentDirectional.topCenter,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: SizedBox(
+                        height: 24,
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            hintText: '정답을 적어주세요',
+                            hintStyle: TextStyle(color: Colors.grey, fontStyle:FontStyle.italic)
+                          ),
+                          textAlign : TextAlign.center,
+                          readOnly: !isSolving,
+                          autofocus: true,
+                          focusNode: textFieldFocusNode,
+                          controller: textFieldController,
+                        )
                       ),
-                        textAlign : TextAlign.center,
-                        onChanged: (value) {
-                          userAnswer = value;
-                        },
-                        validator: (value) {
-                          if(value != currentProblem.answer){
-                            currentProblem.answer;
-                          }
-                        },
-                      ),
-                    )
-                    //isSolving 이 false면 readOnly
-                  ),
+                    ),
+                    isSolving?Container():                
+                      textFieldController.text == currentProblem.answer ? 
+                        Image.asset('assets/images/correct_pen.png', height: 40):Image.asset('assets/images/wrong_pen.png', height: 40),
+                  ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
                   child: ElevatedButton(
                     child: Text(isSolving?'정답확인':'다음문제'),
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                        if(isSolving){
-                          isSolving=false;
-                          //isSolving은 controller에서 관리해야할 것 같다.
-                          //문제 체점해서 틀렸으면 review에 add
-                          //정답 및 해설을 볼 수 있도록 키보드도 자동으로 내리기.
+                          setState(() {
+                            isSolving=false;
+                          });
+                          if(textFieldController.text != currentProblem.answer){
+                            if(!controller.review.contains(problemIndex)){
+                              controller.addReview(problemIndex);
+                            }
+                          }
                         }else{
-                          isSolving=true;
-                          //page ++
+                          if(controller.page +1 != controller.numQuiz){
+                              textFieldFocusNode.requestFocus();
+                              setState(() {
+                                isSolving=true;
+                                textFieldController.text = '';
+                              });
+                              controller.nextPage();
+                          }else{
+                            //체점화면으로
+                          }
                         }
                     },
                   ),
                 ),
                 isSolving?Container():
-                Text(currentProblem.answer)
+                Text(currentProblem.answer,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.pink,
+                    fontSize: 24,
+                    fontFamily: 'Cafe24Oneprettynight',
+                    fontStyle : FontStyle.italic
+                  ),
+                )
               ],
             )
         );

@@ -27,7 +27,7 @@ class NewWorkbookCompletePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.off(() => const WorkbookMenuPage(), arguments: 'abc', transition: Transition.fadeIn);
+                    Get.off(() => const WorkbookMenuPage(), transition: Transition.fadeIn);
                   },
                   child: const Text('당장 풀러가기')
                 ),

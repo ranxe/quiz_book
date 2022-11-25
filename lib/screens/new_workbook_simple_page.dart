@@ -21,7 +21,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
   String? hint = '';
 
   SnackBar shwoSaveSnackbar() {
-    return SnackBar(
+    return const SnackBar(
       content: Text('저장했습니다.', textAlign: TextAlign.center),
       duration: Duration(milliseconds: 1500)
     );
@@ -121,6 +121,14 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                           onPressed: () {
                             controller.previousPage();
                             _formKey.currentState?.reset();
+                            setState(() {
+                              Problem nextProblem = controller.problems[controller.page];
+                              id = controller.page;
+                              question = nextProblem.question;
+                              picture = nextProblem.picture;
+                              answer = nextProblem.answer;
+                              hint = nextProblem.hint;
+                            });
                           },
                           child: const Icon(Icons.arrow_back)
                         ) : OutlinedButton(
@@ -134,6 +142,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                         ElevatedButton(
                           onPressed: () {
                             if(_formKey.currentState!.validate()){
+                              FocusScope.of(context).unfocus();
                               if(controller.page == controller.problems.length){
                                 Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
                                 controller.addProblem(problem);
@@ -152,6 +161,14 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                         ElevatedButton(
                           onPressed: () {
                             controller.nextPage();
+                            setState(() {
+                              Problem nextProblem = controller.problems[controller.page];
+                              id = controller.page;
+                              question = nextProblem.question;
+                              picture = nextProblem.picture;
+                              answer = nextProblem.answer;
+                              hint = nextProblem.hint;
+                            });
                             _formKey.currentState?.reset();
                           },
                           child: const Icon(Icons.arrow_forward)
@@ -166,10 +183,10 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                                   _formKey.currentState?.reset();
                                 }else if(controller.page == controller.problems.length){
                                   if(_formKey.currentState!.validate()) {
+                                    FocusScope.of(context).unfocus();
                                     Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
                                     controller.addProblem(problem);
                                     controller.nextPage();
-                                    
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       shwoSaveSnackbar()
                                     );
@@ -185,9 +202,9 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                     padding: const EdgeInsets.symmetric(horizontal : 8.0),
                     child: ElevatedButton(
                           onPressed: () {
-                            // if (controller.problems.isNotEmpty) {
+                            if (controller.problems.isNotEmpty) {
                               Get.off(()=>const NewWorkbookCompletePage(), transition: Transition.fadeIn);
-                            // }
+                            }
                           },
                           child: const Text('문제지 완성')
                     ),
