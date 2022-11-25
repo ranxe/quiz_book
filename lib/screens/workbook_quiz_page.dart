@@ -155,6 +155,9 @@ class _WorkbookQuizPageState extends State<WorkbookQuizPage> {
                             }
                           }else{
                             controller.increaseCorrect();
+                            if(controller.isReview){
+                              controller.addCorrect(problemIndex);
+                            }
                           }
                         }else{
                           if(controller.page +1 != controller.numQuiz){

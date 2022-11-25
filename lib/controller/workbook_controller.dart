@@ -11,9 +11,10 @@ class WorkbookController extends GetxController {
   List<Problem> problems = [];
   int page = 0;
   int numQuiz = 1;
-  int correct = 0;
+  int numCorrect = 0;
   List<int> quizzes = [];
   List<int> review = [];
+  List<int> correct = [];
   bool isReview = false;
 
   void setName(String name){
@@ -36,6 +37,10 @@ class WorkbookController extends GetxController {
     this.quizzes = quizzes;
   }
 
+  void setReview(List<int> review){
+    this.review = review;
+  }
+
   void addProblem(Problem problem){
     problems.add(problem);
   }
@@ -43,6 +48,10 @@ class WorkbookController extends GetxController {
   void addReview(int index){
     review.add(index);
     update();
+  }
+
+  void addCorrect(int index){
+    correct.add(index);
   }
 
   void removeReview(int index){
@@ -58,6 +67,10 @@ class WorkbookController extends GetxController {
     problems[index] = problem;
   }
 
+  void setIsReview(bool flag){
+    isReview = flag;
+  }
+
   void nextPage(){
     page++;
     update();
@@ -71,12 +84,13 @@ class WorkbookController extends GetxController {
   }
 
   void increaseCorrect(){
-    correct++;
+    numCorrect++;
   }
 
   void initQuiz(){
     page = 0;
-    correct = 0;
+    numCorrect = 0;
+    correct = [];
   }
 
 }
