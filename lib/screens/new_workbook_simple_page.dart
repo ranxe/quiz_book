@@ -138,23 +138,28 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                               onPressed: () {},
                               child: const Icon(Icons.arrow_back)
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if(_formKey.currentState!.validate()){
-                              FocusScope.of(context).unfocus();
-                              if(controller.page == controller.problems.length){
-                                Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
-                                controller.addProblem(problem);
-                              } else if(controller.page < controller.problems.length){
-                                 Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
-                                 controller.setProblem(controller.page, problem);
-                              }
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                shwoSaveSnackbar()
-                              );
-                            }
-                          },
-                          child: const Text("저장")
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if(_formKey.currentState!.validate()){
+                                  FocusScope.of(context).unfocus();
+                                  if(controller.page == controller.problems.length){
+                                    Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
+                                    controller.addProblem(problem);
+                                  } else if(controller.page < controller.problems.length){
+                                     Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
+                                     controller.setProblem(controller.page, problem);
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    shwoSaveSnackbar()
+                                  );
+                                }
+                              },
+                              child: const Text("저장")
+                            ),
+                          ),
                         ),
                         controller.page +1 < controller.problems.length ?
                         ElevatedButton(
@@ -182,7 +187,6 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                                   _formKey.currentState?.reset();
                                 }else if(controller.page == controller.problems.length){
                                   if(_formKey.currentState!.validate()) {
-                                    // FocusScope.of(context).unfocus();
                                     Problem problem = Problem(id: 0, workbookId: controller.page, isReview: false, question: question, answer: answer, hint: hint);
                                     controller.addProblem(problem);
                                     controller.nextPage();

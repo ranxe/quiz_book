@@ -4,14 +4,14 @@ import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 import 'package:quiz_book/models/problem.dart';
 
-class SolveWorkbookPage extends StatefulWidget {
-  const SolveWorkbookPage({super.key});
+class WorkbookQuizPage extends StatefulWidget {
+  const WorkbookQuizPage({super.key});
 
   @override
-  State<SolveWorkbookPage> createState() => _SolveWorkbookPageState();
+  State<WorkbookQuizPage> createState() => _WorkbookQuizPageState();
 }
 
-class _SolveWorkbookPageState extends State<SolveWorkbookPage> {
+class _WorkbookQuizPageState extends State<WorkbookQuizPage> {
 
   late FocusNode textFieldFocusNode;
   final textFieldController = TextEditingController();
@@ -141,7 +141,8 @@ class _SolveWorkbookPageState extends State<SolveWorkbookPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
                   child: ElevatedButton(
-                    child: Text(isSolving?'정답확인':'다음문제'),
+                    child: Text(isSolving?'정답확인':
+                      controller.page +1 != controller.numQuiz? '다음문제' : '결과보기'),
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                        if(isSolving){
@@ -152,6 +153,8 @@ class _SolveWorkbookPageState extends State<SolveWorkbookPage> {
                             if(!controller.review.contains(problemIndex)){
                               controller.addReview(problemIndex);
                             }
+                          }else{
+                            controller.increaseCorrect();
                           }
                         }else{
                           if(controller.page +1 != controller.numQuiz){
@@ -162,13 +165,13 @@ class _SolveWorkbookPageState extends State<SolveWorkbookPage> {
                               });
                               controller.nextPage();
                           }else{
-                            //체점화면으로
+                            Get.offNamed('/workbook/grade');
                           }
                         }
                     },
                   ),
                 ),
-                isSolving?Container():
+                isSolving && currentProblem.answer != textFieldController.text ?Container():
                 Text(currentProblem.answer,
                   textAlign: TextAlign.center,
                   style: const TextStyle(

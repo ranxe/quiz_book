@@ -5,7 +5,8 @@ import 'package:quiz_book/screens/new_workbook_complete_page.dart';
 import 'package:quiz_book/screens/new_workbook_exel_page.dart';
 import 'package:quiz_book/screens/new_workbook_page.dart';
 import 'package:quiz_book/screens/new_workbook_simple_page.dart';
-import 'package:quiz_book/screens/solve_workbook_page.dart';
+import 'package:quiz_book/screens/workbook_grade_page.dart';
+import 'package:quiz_book/screens/workbook_quiz_page.dart';
 import 'package:quiz_book/screens/workbook_menu_page.dart';
 import 'screens/home_page.dart';
 
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/new/exel', page: (() => const NewWorkbookExelPage())),
         GetPage(name: '/new/complete', page: (() => const NewWorkbookCompletePage())),
         GetPage(name: '/workbook', page: (() => const WorkbookMenuPage())),
-        GetPage(name: '/workbook/solve', page: (() => const SolveWorkbookPage()))
+        GetPage(name: '/workbook/quiz', page: (() => const WorkbookQuizPage())),
+        GetPage(name: '/workbook/grade', page: (() => const WorkbookGradePage()))
       ],
     );
   }

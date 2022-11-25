@@ -32,7 +32,7 @@ class WorkbookMenuPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(24.0, 16, 24, 16),
                   child: ElevatedButton(
                     onPressed: () {
-                      controller.initPage();
+                      controller.initQuiz();
                       Get.dialog(
                         AlertDialog(
                           title : const Icon(Icons.settings, color : Colors.grey),
@@ -99,7 +99,7 @@ class WorkbookMenuPage extends StatelessWidget {
                                   var quizes = List<int>.generate(numProblems, (i) => i);
                                   quizes.shuffle();
                                   controller.setQuizzes(quizes.sublist(0,numQuiz));
-                                  Get.offNamed('/workbook/solve');
+                                  Get.offNamed('/workbook/quiz');
                                 }
                               },
                               child: const Text('GO !'),
