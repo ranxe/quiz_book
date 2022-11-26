@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
+import 'package:quiz_book/components/secondary_button%20.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 import 'package:quiz_book/models/problem.dart';
 
@@ -70,13 +72,9 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 1.0
-                      ),
+                    child: SecondaryButton(
                       onPressed: () {},
-                      child: const Text('이미지 추가')
+                      text: '이미지 추가'
                     ),
                   ),
                   Padding(
@@ -116,7 +114,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                     child: Row(
                       mainAxisAlignment : MainAxisAlignment.spaceBetween,
                       children: [
-                        controller.page != 0 ? ElevatedButton(
+                        controller.page != 0 ? OutlinedButton(
                           onPressed: () {
                             controller.previousPage();
                             _formKey.currentState?.reset();
@@ -133,7 +131,6 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                         ) : OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                elevation: 1.0
                               ),
                               onPressed: () {},
                               child: const Icon(Icons.arrow_back)
@@ -141,7 +138,7 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: ElevatedButton(
+                            child: PrimaryButton(
                               onPressed: () {
                                 if(_formKey.currentState!.validate()){
                                   FocusScope.of(context).unfocus();
@@ -157,12 +154,12 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                                   );
                                 }
                               },
-                              child: const Text("저장")
+                              text: "저장"
                             ),
                           ),
                         ),
                         controller.page +1 < controller.problems.length ?
-                        ElevatedButton(
+                        OutlinedButton(
                           onPressed: () {
                             controller.nextPage();
                             setState(() {
@@ -179,7 +176,6 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                         ) : OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                elevation: 1.0
                               ),
                               onPressed: () {
                                 if(controller.page + 1 == controller.problems.length){  
@@ -203,13 +199,13 @@ class _NewWorkbookSimplePageState extends State<NewWorkbookSimplePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal : 8.0),
-                    child: ElevatedButton(
+                    child: PrimaryButton(
                           onPressed: () {
                             if (controller.problems.isNotEmpty) {
                               Get.offNamed('/new/complete');
                             }
                           },
-                          child: const Text('문제지 완성')
+                          text: '문제지 완성'
                     ),
                   )
                 ],

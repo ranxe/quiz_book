@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
+import 'package:quiz_book/constant/constant.dart';
 class QuizSetting extends StatelessWidget {
   const QuizSetting({
     Key? key,
@@ -68,12 +70,12 @@ class QuizSetting extends StatelessWidget {
         ],
       ),
       actions: <Widget>[
-        ElevatedButton(
+        PrimaryButton(
           onPressed: () {
             onPressed();
           },
-          child: const Text('GO !'),
-        ),
+          text: 'GO !'
+        )
       ],
     );
   }

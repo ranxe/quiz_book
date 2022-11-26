@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 import 'package:quiz_book/models/problem.dart';
@@ -140,9 +141,9 @@ class _WorkbookQuizPageState extends State<WorkbookQuizPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 8.0),
-                  child: ElevatedButton(
-                    child: Text(isSolving?'정답확인':
-                      controller.page +1 != controller.numQuiz? '다음문제' : '결과보기'),
+                  child: PrimaryButton(
+                    text: isSolving?'정답확인':
+                      controller.page +1 != controller.numQuiz? '다음문제' : '결과보기',
                     onPressed: () {
                       FocusScope.of(context).unfocus();
                        if(isSolving){

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
+import 'package:quiz_book/components/secondary_button%20.dart';
+import 'package:quiz_book/constant/constant.dart';
 
 class NewWorkbookCompletePage extends StatelessWidget {
   const NewWorkbookCompletePage({super.key});
@@ -23,24 +26,20 @@ class NewWorkbookCompletePage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: ElevatedButton(
+                child: PrimaryButton(
                   onPressed: () {
                     Get.offNamed('/workbook');
                   },
-                  child: const Text('당장 풀러가기')
+                  text : '당장 풀러가기'
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    elevation: 1.0
-                  ),
+                child: SecondaryButton(
                   onPressed: () {
                     Get.offNamed('/');
                   },
-                  child: const Text('다음에 풀기')
+                  text : '다음에 풀기'
                 ),
               ),
             ],

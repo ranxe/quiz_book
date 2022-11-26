@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 String defaultName = '새 문제집';
 
-MaterialColor primaryColor= Colors.green;
+MaterialColor primaryColor = Colors.green;
+Color secondaryColor = Colors.white;
 
 List<Color> pallete = [
   Colors.white,

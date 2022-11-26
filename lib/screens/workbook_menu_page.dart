@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
 import 'package:quiz_book/components/quiz_setting.dart';
+import 'package:quiz_book/components/secondary_button%20.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 
@@ -31,8 +33,8 @@ class WorkbookMenuPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(24.0, 16, 24, 16),
-                  child: ElevatedButton(
-                    child: const Text('문제 풀기'),
+                  child: PrimaryButton(
+                    text: '문제 풀기',
                     onPressed: () {
                       controller.initQuiz();
                       controller.setIsReview(true);
@@ -67,8 +69,8 @@ class WorkbookMenuPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: ElevatedButton(
-                    child: const Text('복습 하기'),
+                  child: PrimaryButton(
+                    text: '복습 하기',
                     onPressed: (){
                       controller.initQuiz();
                       controller.setIsReview(true);
@@ -103,13 +105,9 @@ class WorkbookMenuPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(24.0, 16, 24, 16),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 1.0
-                    ),
+                  child: SecondaryButton(
                     onPressed: () {},
-                    child: const Text('문제 수정')
+                    text: '문제 수정'
                   ),
                 ),
               ],

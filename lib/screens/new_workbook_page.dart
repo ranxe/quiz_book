@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_book/components/color_selector.dart';
+import 'package:quiz_book/components/primary_button.dart';
+import 'package:quiz_book/components/secondary_button%20.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 
@@ -51,7 +53,7 @@ class _NewWorkbookPageState extends State<NewWorkbookPage> {
               GetX<WorkbookController>(
                 builder: (controller) {
                   return OutlinedButton(
-                      style : ElevatedButton.styleFrom(
+                      style : OutlinedButton.styleFrom(
                         backgroundColor : controller.color.value
                       ),
                       child: SizedBox(
@@ -143,28 +145,24 @@ class _NewWorkbookPageState extends State<NewWorkbookPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: GetBuilder<WorkbookController>(
                   builder: (controller) {
-                    return ElevatedButton(
+                    return PrimaryButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();
                         Get.offNamed('/new/simple');
                       },
-                      child: const Text('간단히 만들기')
+                      text: '간단히 만들기'
                     );
                   }
                 ),
               ),
               GetBuilder<WorkbookController>(
                 builder: (controller) {
-                  return OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      elevation: 1.0
-                    ),
+                  return SecondaryButton(
                     onPressed: (){
                       FocusScope.of(context).unfocus();
                       Get.offNamed('/new/exel');
                     },
-                    child: const Text('엑셀로 만들기')
+                    text: '엑셀로 만들기'
                   );
                 }
               ),

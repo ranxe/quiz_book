@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_book/components/primary_button.dart';
+import 'package:quiz_book/components/secondary_button%20.dart';
 import 'package:quiz_book/constant/constant.dart';
 import 'package:quiz_book/controller/workbook_controller.dart';
 
@@ -86,8 +88,8 @@ class _WorkbookGradePageState extends State<WorkbookGradePage> {
                       padding: const EdgeInsets.all(16.0),
                       child: GetBuilder<WorkbookController>(
                         builder: (controller) {
-                          return ElevatedButton(
-                            child: const Text('복습하러 가기'),
+                          return PrimaryButton(
+                            text: '복습하러 가기',
                             onPressed: () {
                               if(controller.isReview && isChecked){
                                 List<int> newList = [...controller.review];
@@ -114,15 +116,11 @@ class _WorkbookGradePageState extends State<WorkbookGradePage> {
                   Expanded(
                     child: Padding(
                        padding: const EdgeInsets.all(16.0),
-                       child: OutlinedButton(
-                         style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          elevation: 1.0
-                        ),
+                       child: SecondaryButton(
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('다음에 하기')
+                        text: '다음에 하기'
                       )  ,
                     ),
                   ),

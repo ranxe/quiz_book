@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisSize : MainAxisSize.min,
                 children: [
-                  ElevatedButton(
-                    style : ElevatedButton.styleFrom(
+                  OutlinedButton(
+                    style : OutlinedButton.styleFrom(
                       backgroundColor : Colors.white
                     ),
                     onPressed: () {
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                 mainAxisSize : MainAxisSize.min,
                 children: [
                   OutlinedButton(
-                    style : ElevatedButton.styleFrom(
+                    style : OutlinedButton.styleFrom(
                       backgroundColor : Colors.white
                     ),
                     onPressed: () {
